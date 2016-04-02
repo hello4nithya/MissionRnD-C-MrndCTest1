@@ -28,7 +28,101 @@ struct node{
 	struct node *next;
 };
 
+int diff_year(struct node *date1head, struct node *date2head){
+	struct node *temp1, *temp2;
+	temp1 = date1head;
+	temp2 = date2head;
+	int i = 0,n1=0,n2=0;
+	for (i = 0; i < 4; i++){
+		temp1 = temp1->next;
+	}
+	for (i = 0; i < 4; i++){
+		n1 = (n1 * 10) + temp1->data;
+		temp1 = temp1->next;
+	}
+	for (i = 0; i < 4; i++){
+		temp2 = temp2->next;
+	}
+	for (i = 0; i < 4; i++){
+		n2 = (n2 * 10) + temp2->data;
+		temp2 = temp2->next;
+	}
+	if (n1 > n2){
+		return n1 - n2;
+	}
+	else if (n1 == n2){
+		return 0;
+	}
+	else{
+		return n2 - n1;
+	}
+
+}
+int diff_month(struct node *date1head, struct node *date2head){
+	struct node *temp1, *temp2;
+	temp1 = date1head;
+	temp2 = date2head;
+	int i = 0, n1 = 0, n2 = 0;
+	for (i = 0; i < 2; i++){
+		temp1 = temp1->next;
+	}
+	for (i = 0; i < 2; i++){
+		n1 = (n1 * 10) + temp1->data;
+		temp1 = temp1->next;
+	}
+	for (i = 0; i < 2; i++){
+		temp2 = temp2->next;
+	}
+	for (i = 0; i < 2; i++){
+		n2 = (n2 * 10) + temp2->data;
+		temp2 = temp2->next;
+	}
+	if (n1 > n2){
+		return n1 - n2;
+	}
+	else if (n1 == n2){
+		return 0;
+	}
+	else{
+		return n2 - n1;
+	}
+
+}
+int diff_day(struct node *date1head, struct node *date2head){
+	struct node *temp1, *temp2;
+	temp1 = date1head;
+	temp2 = date2head;
+	int i = 0, n1 = 0, n2 = 0;
+	
+	for (i = 0; i < 2; i++){
+		n1 = (n1 * 10) + temp1->data;
+		temp1 = temp1->next;
+	}
+	
+	for (i = 0; i < 2; i++){
+
+		n2 = (n2 * 10) + temp2->data;
+		temp2 = temp2->next;
+	}
+	if (n1 > n2){
+		return n1 - n2;
+	}
+	else if (n1 == n2){
+		return 0;
+	}
+	else{
+		return n2 - n1;
+	}
+
+}
+
 
 int between_days(struct node *date1head, struct node *date2head){
-	return -1;
+	int y, m, d;
+	if (date1head == NULL || date2head == NULL)
+	 return -1;
+	y = diff_year(date1head, date2head);
+	m = diff_month(date1head, date2head);
+	d = diff_day(date1head, date2head);
+	return (y * 365) + (m * 30) + d;
 }
